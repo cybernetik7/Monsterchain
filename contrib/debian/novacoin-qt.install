@@ -1,0 +1,5 @@
+MonsterChain-qt usr/bin
+share/pixmaps/MonsterChain32.xpm usr/share/pixmaps
+share/pixmaps/MonsterChain80.xpm usr/share/pixmaps
+debian/MonsterChain-qt.desktop usr/share/applications
+debian/MonsterChain-qt.protocol usr/share/kde4/services/

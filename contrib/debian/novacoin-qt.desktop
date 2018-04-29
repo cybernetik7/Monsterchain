@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=MonsterChain
+Comment=MonsterChain P2P Cryptocurrency
+Comment[ru]=MonsterChain, P2P криптовалюта
+Comment[fr]=MonsterChain, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=MonsterChain, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/MonsterChain-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/MonsterChain80.xpm
+MimeType=x-scheme-handler/MonsterChain;
+Categories=Office;

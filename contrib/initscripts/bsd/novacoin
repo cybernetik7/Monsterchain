@@ -1,0 +1,68 @@
+#!/bin/sh
+
+# PROVIDE: MonsterChain
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+#
+# Add the following lines to /etc/rc.conf.local or /etc/rc.conf
+# to enable this service:
+#
+# MonsterChain_enable (bool): Set to NO by default. Set this variable to YES if you want to enable MonsterChain service.
+# MonsterChain_config (path): Set to /usr/local/etc/MonsterChain.conf by default.
+# MonsterChain_user:  The user account MonsterChain daemon runs as. It uses 'root' user by default.
+# MonsterChain_group: The group account MonsterChain daemon runs as. It uses 'wheel' group by default.
+# MonsterChain_datadir (str): Default to "/var/db/MonsterChain". Base data directory.
+
+. /etc/rc.subr
+
+name=MonsterChain
+rcvar=MonsterChain_enable
+
+: ${MonsterChain_enable:=NO}
+: ${MonsterChain_config=/usr/local/etc/MonsterChain.conf}
+: ${MonsterChain_datadir=/var/db/MonsterChain}
+: ${MonsterChain_user="root"}
+: ${MonsterChain_group="wheel"}
+
+required_files=${MonsterChain_config}
+command=/usr/local/bin/MonsterChaind
+MonsterChain_chdir=${MonsterChain_datadir}
+pidfile="${MonsterChain_datadir}/MonsterChaind.pid"
+stop_cmd=MonsterChain_stop
+command_args="-conf=${MonsterChain_config} -datadir=${MonsterChain_datadir} -daemon -pid=${pidfile}"
+start_precmd="${name}_prestart"
+
+MonsterChain_create_datadir()
+{
+	echo "Creating data directory"
+	eval mkdir -p ${MonsterChain_datadir}
+	[ $? -eq 0 ] && chown -R ${MonsterChain_user}:${MonsterChain_group} ${MonsterChain_datadir}
+}
+
+MonsterChain_prestart()
+{
+	if [ ! -d "${MonsterChain_datadir}/." ]; then
+		MonsterChain_create_datadir || return 1
+	fi
+}
+
+MonsterChain_requirepidfile()
+{
+	if [ ! "0`check_pidfile ${pidfile} ${command}`" -gt 1 ]; then
+		echo "${name} not running? (check $pidfile)."
+		exit 1
+	fi
+}
+
+MonsterChain_stop()
+{
+    MonsterChain_requirepidfile
+
+	echo "Stopping ${name}."
+	eval ${command} -conf=${MonsterChain_config} -datadir=${MonsterChain_datadir} stop
+	wait_for_pids ${rc_pid}
+}
+
+load_rc_config $name
+run_rc_command "$1"

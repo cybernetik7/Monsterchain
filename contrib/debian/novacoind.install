@@ -1,0 +1,2 @@
+debian/bin/MonsterChaind usr/bin
+src/MonsterChaind usr/lib/MonsterChain

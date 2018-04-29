@@ -1,0 +1,11 @@
+[Unit]
+Description=MonsterChain daemon serivce
+After=network.target
+
+[Service]
+Type=simple
+User=MonsterChain
+ExecStart=/opt/MonsterChain/MonsterChaind
+
+[Install]
+WantedBy=multi-user.target
