@@ -1,14 +1,14 @@
-MonsterChain - Global Digital Currency
+MonsterChain - High Yield Proof of Stake Currency
 
 NOTE: The software version number incorrectly says 1.0.0. in the wallets and server. 
 
-Symbol: STAR  (changed from STC)
+Symbol: MSX
 
 RPC Port: 24425
 
 Network Port: 24426
 
-New staking scheme implemented:
+Staking Interest:
 
 Year 1: 160%
 Year 2: 80%
@@ -20,6 +20,5 @@ Year 7: 2.5%
 Year 8: 1.25%
 Year +: 1.25%
 
-
-http://starcash.co
+https://www.monsterchain.io
 
